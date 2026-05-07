@@ -1,1 +1,305 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FloSync | Florence Abayomi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --cyan:#00D4FF;--cyan-dim:rgba(0,212,255,0.12);--cyan-border:rgba(0,212,255,0.22);--navy:#0D1117;--navy-2:#0D1F2D;--navy-3:#1A2332;--navy-4:#1E2D3D;--white:#FFFFFF;--gray:#8B949E;--gray-2:#4A5568; }
+  *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{background:var(--navy);color:var(--white);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}
+  ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:var(--cyan);}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:rgba(13,17,23,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--cyan-border);}
+  .nav-logo{display:flex;align-items:center;gap:10px;}
+  .nav-logo-icon{width:36px;height:36px;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--navy);}
+  .nav-logo-text{font-size:18px;font-weight:700;letter-spacing:2px;}
+  .nav-logo-text span{color:var(--cyan);}
+  .nav-links{display:flex;gap:32px;list-style:none;align-items:center;}
+  .nav-links a{color:var(--gray);text-decoration:none;font-size:13px;letter-spacing:1px;font-weight:500;transition:color 0.3s;}
+  .nav-links a:hover{color:var(--cyan);}
+  .nav-cta{background:var(--cyan)!important;color:var(--navy)!important;padding:10px 24px!important;font-size:12px!important;font-weight:700!important;}
+  .whatsapp-float{position:fixed;bottom:30px;right:30px;z-index:999;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.3s;}
+  .whatsapp-float:hover{transform:scale(1.1);}
+  .hero{min-height:100vh;position:relative;display:flex;align-items:center;padding:120px 60px 80px;overflow:hidden;}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.04) 1px,transparent 1px);background-size:60px 60px;}
+  .hero-glow{position:absolute;top:20%;left:40%;width:500px;height:500px;background:radial-gradient(circle,rgba(0,212,255,0.07) 0%,transparent 70%);pointer-events:none;}
+  .hero-content{position:relative;max-width:700px;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--cyan-dim);border:1px solid var(--cyan-border);padding:8px 16px;margin-bottom:32px;}
+  .hero-badge-dot{width:8px;height:8px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+  .hero-badge-text{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);font-weight:600;}
+  .hero-title{font-size:clamp(42px,6vw,72px);font-weight:700;line-height:1.05;margin-bottom:12px;letter-spacing:-1px;}
+  .hero-title span{color:var(--cyan);}
+  .hero-name{font-family:'Space Mono',monospace;font-size:15px;color:var(--cyan);letter-spacing:3px;margin-bottom:20px;}
+  .hero-tagline{font-size:clamp(18px,2.5vw,28px);font-weight:300;color:rgba(255,255,255,0.7);margin-bottom:28px;line-height:1.4;}
+  .hero-tagline strong{color:var(--white);font-weight:600;}
+  .hero-desc{font-size:15px;color:var(--gray);line-height:1.8;margin-bottom:44px;max-width:560px;}
+  .hero-buttons{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;}
+  .btn-primary{background:var(--cyan);color:var(--navy);border:none;padding:14px 32px;font-size:13px;letter-spacing:1px;font-weight:700;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all 0.3s;}
+  .btn-primary:hover{background:#33DDFF;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,212,255,0.3);}
+  .btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan-border);padding:14px 32px;font-size:13px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all 0.3s;text-decoration:none;display:inline-block;}
+  .btn-outline:hover{background:var(--cyan-dim);border-color:var(--cyan);}
+  .hero-stats{display:flex;gap:48px;}
+  .hero-stat-num{font-size:36px;font-weight:700;color:var(--cyan);line-height:1;font-family:'Space Mono',monospace;}
+  .hero-stat-label{font-size:11px;color:var(--gray);letter-spacing:1px;margin-top:4px;}
+  .tech-stack{background:var(--navy-2);border-top:1px solid var(--cyan-border);border-bottom:1px solid var(--cyan-border);padding:22px 60px;display:flex;align-items:center;gap:32px;overflow-x:auto;}
+  .tech-stack-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);white-space:nowrap;font-weight:600;font-family:'Space Mono',monospace;}
+  .tech-stack-divider{width:1px;height:20px;background:var(--cyan-border);flex-shrink:0;}
+  .tech-tags{display:flex;gap:10px;flex-wrap:wrap;}
+  .tech-tag{font-family:'Space Mono',monospace;font-size:11px;color:var(--gray);border:1px solid var(--gray-2);padding:5px 12px;letter-spacing:1px;transition:all 0.3s;cursor:default;white-space:nowrap;}
+  .tech-tag:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim);}
+  section{padding:90px 60px;}
+  .section-label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+  .section-label::before{content:'//';opacity:0.5;}
+  .section-title{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.1;margin-bottom:16px;letter-spacing:-0.5px;}
+  .section-title span{color:var(--cyan);}
+  .section-desc{font-size:15px;color:var(--gray);line-height:1.8;max-width:600px;}
+  .cyan-line{width:48px;height:2px;background:var(--cyan);margin:20px 0;}
+  .services{background:var(--navy);}
+  .services-header{margin-bottom:56px;}
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+  .service-card{background:var(--navy-3);padding:40px 36px;border-left:2px solid transparent;transition:all 0.4s;cursor:pointer;position:relative;overflow:hidden;}
+  .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cyan);transform:scaleX(0);transition:transform 0.4s;transform-origin:left;}
+  .service-card:hover{background:var(--navy-4);border-left-color:var(--cyan);}
+  .service-card:hover::before{transform:scaleX(1);}
+  .service-num{font-family:'Space Mono',monospace;font-size:11px;color:var(--cyan);letter-spacing:2px;margin-bottom:18px;opacity:0.5;}
+  .service-icon{font-size:30px;margin-bottom:18px;display:block;}
+  .service-title{font-size:19px;font-weight:700;margin-bottom:12px;}
+  .service-desc{font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:18px;}
+  .service-tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .service-tag{font-size:10px;color:var(--cyan);border:1px solid var(--cyan-border);padding:4px 10px;font-family:'Space Mono',monospace;letter-spacing:1px;}
+  .portfolio{background:var(--navy-2);}
+  .portfolio-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;}
+  .portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .project-card{background:var(--navy-3);border:1px solid rgba(255,255,255,0.05);transition:all 0.4s;cursor:pointer;overflow:hidden;}
+  .project-card:hover{border-color:var(--cyan-border);transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
+  .project-header{padding:28px 28px 20px;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .project-type{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;}
+  .project-title{font-size:19px;font-weight:700;margin-bottom:10px;}
+  .project-desc{font-size:13px;color:var(--gray);line-height:1.7;}
+  .project-footer{padding:16px 28px;display:flex;justify-content:space-between;align-items:center;}
+  .project-tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .project-tag{font-size:10px;color:var(--gray);background:rgba(255,255,255,0.05);padding:4px 10px;font-family:'Space Mono',monospace;}
+  .project-link{font-size:11px;color:var(--cyan);letter-spacing:1px;text-decoration:none;white-space:nowrap;}
+  .project-link:hover{text-decoration:underline;}
+  .about{background:var(--navy);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .about-image{position:relative;}
+  .about-img-placeholder{width:100%;height:500px;background:var(--navy-3);border:1px solid var(--cyan-border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;overflow:hidden;}
+  .about-initials{font-family:'Space Mono',monospace;font-size:80px;font-weight:700;color:var(--cyan);opacity:0.12;}
+  .about-img-label{font-size:10px;letter-spacing:4px;color:rgba(255,255,255,0.2);text-transform:uppercase;font-family:'Space Mono',monospace;}
+  .about-corner{position:absolute;width:24px;height:24px;border-color:var(--cyan);border-style:solid;opacity:0.35;}
+  .tl{top:16px;left:16px;border-width:2px 0 0 2px;}.tr{top:16px;right:16px;border-width:2px 2px 0 0;}.bl{bottom:16px;left:16px;border-width:0 0 2px 2px;}.br{bottom:16px;right:16px;border-width:0 2px 2px 0;}
+  .about-text p{font-size:14px;color:var(--gray);line-height:1.9;margin-bottom:16px;}
+  .about-highlight{background:var(--cyan-dim);border-left:2px solid var(--cyan);padding:16px 20px;margin:24px 0;font-size:14px;color:rgba(255,255,255,0.8);line-height:1.7;font-style:italic;}
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:28px;}
+  .skill-item{display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,0.7);}
+  .skill-dot{width:6px;height:6px;background:var(--cyan);flex-shrink:0;}
+  .contact{background:var(--navy-2);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .contact-info p{font-size:14px;color:var(--gray);line-height:1.9;margin-bottom:28px;}
+  .contact-details{display:flex;flex-direction:column;gap:14px;}
+  .contact-detail{display:flex;align-items:flex-start;gap:14px;}
+  .contact-icon{width:44px;height:44px;background:var(--cyan-dim);border:1px solid var(--cyan-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+  .contact-detail-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:3px;}
+  .contact-detail-value{font-size:13px;color:rgba(255,255,255,0.8);}
+  .contact-form{display:flex;flex-direction:column;gap:12px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .form-input{background:var(--navy-3);border:1px solid rgba(255,255,255,0.07);color:var(--white);padding:14px 18px;font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color 0.3s;width:100%;}
+  .form-input:focus{border-color:var(--cyan);}
+  .form-input::placeholder{color:var(--gray-2);}
+  textarea.form-input{height:120px;resize:none;}
+  footer{background:var(--navy);border-top:1px solid var(--cyan-border);padding:48px 60px;}
+  .footer-top{display:flex;justify-content:space-between;align-items:start;margin-bottom:40px;}
+  .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .footer-logo-icon{width:30px;height:30px;background:var(--cyan);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--navy);}
+  .footer-logo-text{font-size:16px;font-weight:700;letter-spacing:2px;}
+  .footer-logo-text span{color:var(--cyan);}
+  .footer-tagline{font-size:12px;color:var(--gray);font-style:italic;}
+  .footer-links{display:flex;flex-direction:column;gap:10px;}
+  .footer-link{font-size:12px;color:var(--gray);text-decoration:none;letter-spacing:1px;transition:color 0.3s;}
+  .footer-link:hover{color:var(--cyan);}
+  .footer-socials{display:flex;gap:10px;}
+  .social-link{width:40px;height:40px;border:1px solid var(--cyan-border);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:12px;text-decoration:none;transition:all 0.3s;font-weight:700;font-family:'Space Mono',monospace;}
+  .social-link:hover{background:var(--cyan);color:var(--navy);}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,0.05);padding-top:24px;display:flex;justify-content:space-between;align-items:center;}
+  .footer-copy{font-size:11px;color:var(--gray-2);font-family:'Space Mono',monospace;}
+</style>
+</head>
+<body>
+
+<a href="https://wa.me/2349133894355" class="whatsapp-float" target="_blank">💬</a>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">FS</div>
+    <span class="nav-logo-text">Flo<span>Sync</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="hero-badge-dot"></div><span class="hero-badge-text">Available for Remote Projects · Lagos, Nigeria</span></div>
+    <h1 class="hero-title">Cloud. DevOps.<br><span>Web Design.</span></h1>
+    <p class="hero-name">// Florence Abayomi</p>
+    <p class="hero-tagline"><strong>Sync Your Cloud.</strong> Scale Your Business.</p>
+    <p class="hero-desc">Cloud Security & DevOps Engineer and Web Designer with hands-on experience building production infrastructure on AWS and Azure, deploying Kubernetes workloads, and crafting stunning business websites that convert.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View My Work</button>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">7+</div><div class="hero-stat-label">Years in Business</div></div>
+      <div><div class="hero-stat-num">AWS</div><div class="hero-stat-label">& Azure Expert</div></div>
+      <div><div class="hero-stat-num">K8s</div><div class="hero-stat-label">Kubernetes Ready</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="tech-stack">
+  <span class="tech-stack-label">Tech Stack</span>
+  <div class="tech-stack-divider"></div>
+  <div class="tech-tags">
+    <span class="tech-tag">AWS</span><span class="tech-tag">Azure</span><span class="tech-tag">Kubernetes</span><span class="tech-tag">Terraform</span><span class="tech-tag">Docker</span><span class="tech-tag">CI/CD</span><span class="tech-tag">HTML/CSS</span><span class="tech-tag">Cloudflare</span><span class="tech-tag">GitHub</span><span class="tech-tag">Linux</span><span class="tech-tag">IAM</span><span class="tech-tag">MCP</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-label">Services</div>
+    <h2 class="section-title">What I <span>Do</span></h2>
+    <div class="cyan-line"></div>
+    <p class="section-desc">From cloud infrastructure to stunning websites — I deliver production-grade solutions that are secure, scalable, and built to last.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-num">01</div><span class="service-icon">☁️</span><div class="service-title">Cloud Infrastructure</div><p class="service-desc">Deploy and configure production-grade AWS and Azure environments. VPC, EC2, S3, CloudFront, IAM, resource groups — built right the first time.</p><div class="service-tags"><span class="service-tag">AWS</span><span class="service-tag">Azure</span><span class="service-tag">IAM</span><span class="service-tag">S3</span><span class="service-tag">EC2</span></div></div>
+    <div class="service-card"><div class="service-num">02</div><span class="service-icon">⚙️</span><div class="service-title">Terraform & IaC</div><p class="service-desc">Write production-quality Terraform code for AWS & Azure. Scaffold, plan, apply, and manage state. Clean file structure, zero errors.</p><div class="service-tags"><span class="service-tag">Terraform</span><span class="service-tag">IaC</span><span class="service-tag">AWS</span><span class="service-tag">Azure</span></div></div>
+    <div class="service-card"><div class="service-num">03</div><span class="service-icon">🔐</span><div class="service-title">Cloud Security Auditing</div><p class="service-desc">Audit infrastructure for vulnerabilities. S3 policies, IAM least privilege, CloudFront HTTPS, encryption — full findings report with severity levels and exact fixes.</p><div class="service-tags"><span class="service-tag">Security</span><span class="service-tag">IAM</span><span class="service-tag">Compliance</span></div></div>
+    <div class="service-card"><div class="service-num">04</div><span class="service-icon">🚀</span><div class="service-title">DevOps & Kubernetes</div><p class="service-desc">Deploy multi-tier apps on Kubernetes (EKS, AKS). Configure Deployments, Services, Secrets, Ingress, HPA. CI/CD pipelines and Docker environments.</p><div class="service-tags"><span class="service-tag">Kubernetes</span><span class="service-tag">Docker</span><span class="service-tag">CI/CD</span><span class="service-tag">EKS</span><span class="service-tag">AKS</span></div></div>
+    <div class="service-card"><div class="service-num">05</div><span class="service-icon">🌐</span><div class="service-title">Web Design & Deployment</div><p class="service-desc">Build stunning professional websites for businesses. Deployed on Cloudflare Pages with custom domain, HTTPS, and zero ongoing hosting costs.</p><div class="service-tags"><span class="service-tag">HTML/CSS</span><span class="service-tag">Cloudflare</span><span class="service-tag">GitHub</span><span class="service-tag">DNS</span></div></div>
+    <div class="service-card"><div class="service-num">06</div><span class="service-icon">🤖</span><div class="service-title">AI & Agentic Pipelines</div><p class="service-desc">Connect AI agents to live cloud tools using MCP servers. Build and deploy full agentic infrastructure pipelines from scratch.</p><div class="service-tags"><span class="service-tag">MCP</span><span class="service-tag">AI Agents</span><span class="service-tag">Automation</span></div></div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div><div class="section-label">Portfolio</div><h2 class="section-title">Featured <span>Projects</span></h2></div>
+    <a href="https://github.com/FloSync" target="_blank" class="btn-outline">View GitHub →</a>
+  </div>
+  <div class="portfolio-grid">
+    <div class="project-card">
+      <div class="project-header"><div class="project-type">Web Design & Deployment</div><div class="project-title">PrimeLuxe Consulting</div><p class="project-desc">Designed and deployed a full luxury real estate website for a Lagos-based consulting firm. Custom HTML/CSS, deployed on Cloudflare Pages with custom domain, HTTPS, and zero ongoing hosting costs.</p></div>
+      <div class="project-footer"><div class="project-tags"><span class="project-tag">HTML/CSS</span><span class="project-tag">Cloudflare</span><span class="project-tag">GitHub</span></div><a href="https://primeluxeconsulting.online" target="_blank" class="project-link">Live Site →</a></div>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><div class="project-type">Kubernetes · DevOps</div><div class="project-title">Book Review App — K8s</div><p class="project-desc">Deployed a three-tier Book Review application on Kubernetes using Deployments, Services, ConfigMaps, Secrets, StatefulSet, PVC, and HPA. Live on Docker Desktop and Azure AKS.</p></div>
+      <div class="project-footer"><div class="project-tags"><span class="project-tag">Kubernetes</span><span class="project-tag">Docker</span><span class="project-tag">AKS</span></div><a href="https://github.com/FloSync" target="_blank" class="project-link">GitHub →</a></div>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><div class="project-type">Terraform · AWS</div><div class="project-title">3-Tier AWS Infrastructure</div><p class="project-desc">Built and deployed a production-grade three-tier cloud architecture on AWS using Terraform. VPC, EC2, RDS, S3, CloudFront, IAM, security groups, and full compliance best practices.</p></div>
+      <div class="project-footer"><div class="project-tags"><span class="project-tag">Terraform</span><span class="project-tag">AWS</span><span class="project-tag">IaC</span></div><a href="https://github.com/FloSync" target="_blank" class="project-link">GitHub →</a></div>
+    </div>
+    <div class="project-card">
+      <div class="project-header"><div class="project-type">Cloud Security</div><div class="project-title">AWS Security Audit</div><p class="project-desc">Full cloud security audit on AWS infrastructure. Identified vulnerabilities in S3 policies, IAM, CloudFront HTTPS, and hardcoded credentials. Delivered findings report with severity levels and fixes.</p></div>
+      <div class="project-footer"><div class="project-tags"><span class="project-tag">AWS</span><span class="project-tag">Security</span><span class="project-tag">IAM</span></div><a href="https://github.com/FloSync" target="_blank" class="project-link">GitHub →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-image">
+    <div class="about-img-placeholder">
+      <div class="about-corner tl"></div><div class="about-corner tr"></div><div class="about-corner bl"></div><div class="about-corner br"></div>
+      <span class="about-initials">FA</span>
+      <span class="about-img-label">Florence Abayomi</span>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Who is <span>FloSync?</span></h2>
+    <div class="cyan-line"></div>
+    <p>I am Florence Abayomi — a Cloud Security & DevOps Engineer and Web Designer based in Lagos, Nigeria, available for remote contracts worldwide.</p>
+    <p>With 7+ years of experience in sales and operations, I bring something most engineers don't — I understand business. I communicate clearly, meet deadlines, and deliver results that actually move the needle for my clients.</p>
+    <div class="about-highlight">"I do not just write code — I understand business. I am reliable, detail-oriented, and I hate half-done work."</div>
+    <p>My work spans real estate consulting firms, financial institutions, and technology companies across Nigeria and internationally. I deliver production-grade solutions that are secure, scalable, and built to last.</p>
+    <div class="skills-grid">
+      <div class="skill-item"><div class="skill-dot"></div>AWS & Azure</div>
+      <div class="skill-item"><div class="skill-dot"></div>Kubernetes & Docker</div>
+      <div class="skill-item"><div class="skill-dot"></div>Terraform & IaC</div>
+      <div class="skill-item"><div class="skill-dot"></div>Cloud Security</div>
+      <div class="skill-item"><div class="skill-dot"></div>CI/CD Pipelines</div>
+      <div class="skill-item"><div class="skill-dot"></div>Web Design</div>
+      <div class="skill-item"><div class="skill-dot"></div>Linux & Bash</div>
+      <div class="skill-item"><div class="skill-dot"></div>AI & MCP Agents</div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's <span>Work Together</span></h2>
+    <div class="cyan-line"></div>
+    <p>Whether you need cloud infrastructure built from scratch, a security audit, a Kubernetes deployment, or a stunning professional website — I am ready to deliver. Let's talk.</p>
+    <div class="contact-details">
+      <div class="contact-detail"><div class="contact-icon">📞</div><div><div class="contact-detail-label">Phone & WhatsApp</div><div class="contact-detail-value">+234 913 389 4355</div></div></div>
+      <div class="contact-detail"><div class="contact-icon">✉️</div><div><div class="contact-detail-label">Email</div><div class="contact-detail-value">florenceabayomi1@gmail.com</div></div></div>
+      <div class="contact-detail"><div class="contact-icon">📍</div><div><div class="contact-detail-label">Location</div><div class="contact-detail-value">Lagos, Nigeria · Available Worldwide</div></div></div>
+      <div class="contact-detail"><div class="contact-icon">💼</div><div><div class="contact-detail-label">GitHub</div><div class="contact-detail-value">github.com/FloSync</div></div></div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <div class="form-row"><input type="text" class="form-input" placeholder="Your Name"><input type="email" class="form-input" placeholder="Email Address"></div>
+    <input type="text" class="form-input" placeholder="Subject">
+    <select class="form-input" style="cursor:pointer;background:#1A2332;">
+      <option value="" disabled selected>I need help with...</option>
+      <option>Cloud Infrastructure Setup</option>
+      <option>Terraform & IaC</option>
+      <option>Cloud Security Audit</option>
+      <option>Kubernetes & DevOps</option>
+      <option>Web Design & Deployment</option>
+      <option>AI & Agentic Pipelines</option>
+      <option>Other</option>
+    </select>
+    <textarea class="form-input" placeholder="Tell me about your project..."></textarea>
+    <button class="btn-primary" style="width:100%;padding:16px;">Send Message</button>
+    <a href="https://wa.me/2349133894355" style="display:block;text-align:center;background:#25D366;color:#fff;padding:14px;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;text-decoration:none;font-family:'Space Grotesk',sans-serif;">💬 Chat on WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo"><div class="footer-logo-icon">FS</div><span class="footer-logo-text">Flo<span>Sync</span></span></div>
+      <p class="footer-tagline">"Sync Your Cloud. Scale Your Business."</p>
+    </div>
+    <div class="footer-links">
+      <a href="#services" class="footer-link">Services</a>
+      <a href="#portfolio" class="footer-link">Portfolio</a>
+      <a href="#about" class="footer-link">About</a>
+      <a href="#contact" class="footer-link">Contact</a>
+    </div>
+    <div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--cyan);margin-bottom:14px;text-transform:uppercase;">Connect</div>
+      <div class="footer-socials">
+        <a href="https://github.com/FloSync" class="social-link" target="_blank">GH</a>
+        <a href="https://wa.me/2349133894355" class="social-link" target="_blank">WA</a>
+        <a href="mailto:florenceabayomi1@gmail.com" class="social-link">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 FloSync · Florence Abayomi · All rights reserved.</div>
+    <div class="footer-copy">Cloud & DevOps Engineer · Web Designer · Lagos, Nigeria</div>
+  </div>
+</footer>
+</body>
+</html>
